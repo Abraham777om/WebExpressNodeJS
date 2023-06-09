@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PartyRoom</title>
+
+    <style>
+        .top{
+            height: 100px;
+            display: flex;
+        }
+        .mid{
+            display: flex;
+        }
+        .bot{
+            display: flex;
+        }
+        .salon{
+            width: 800px;
+            height: 500px;
+            background: grey;
+        }
+        .r1{
+            width: 75px;
+            height: 25px;
+            background: blue;
+            margin-left: 115px;
+        }
+        .r2{
+            width: 75px;
+            height: 25px;
+            background: blue;
+            margin-left: 100px;
+        }
+        .scenary{
+            width: 200px;
+            height: 100px;
+            background: blue;
+            margin-left: 110px;
+        }
+        .entrance{
+            background: blue;
+            width: 200px;
+            height: 25px;
+            margin-top: 115px;
+            margin-left: 300px;
+        }
+        .gate{
+            background: blue;
+            height: 150px;
+            width: 25px;
+        }
+        .g1{
+            margin-top: 70px;
+        }
+        .g2{
+            margin-top: 70px;
+        }
+        .tablesleft{
+            margin-top: 40px;
+            width: 275px;
+            height: 200px;
+            background: ;
+        }
+        .dancefloor{
+            width: 200px;
+            height: 200px;
+            background: blue;
+            margin-top: 60px;
+            
+        }
+        .ttop{
+            width: 200px;
+            height: 50px;
+            background: ;
+            margin-left: 35px;
+            display: flex;
+        }
+        .table{
+            width: 50px;
+            height: 50px;
+        }
+        .t1{
+            margin-left: 20px;
+            margin-right: 10px;
+        }
+        .t2{
+            margin-left: 50px;
+            margin-right: 10px;
+        }
+        .tmid{
+            width: 200px;
+            height: 50px;
+            background: ;
+            margin-left: 35px;
+            display: flex;
+            margin-top: 50px;
+        }
+        .tbot{
+            width: 200px;
+            height: 50px;
+            background: ;
+            margin-left: 35px;
+            display: flex;
+            margin-top: 50px;
+        }
+        .tablesright{
+            margin-top: 40px;
+            width: 275px;
+            height: 200px;
+            background: ;
+        }
+        .red{
+            background: red;
+        }
+        .green{
+            background: greenyellow;
+        }
+        .para{
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Graduation 2023</h1>
+    <h2>Party Room</h2>
+
+    <h3>If the table is on green it means it is available if it is red it is not available</h3>
+
+
+    <section class="salon">
+        <div class="top">
+            <div class="bathrooms r1">Restrooms</div>
+            <div class="scenary">Scenary</div>
+            <div class="bathrooms r2">Restrooms</div>
+        </div>
+
+        <div class="mid">
+            <div class="gate g1"></div>
+            <div class="tablesleft">
+                <div class="ttop">
+                    
+                    <div id="1" class="table t1 green">1</div>
+                    <div id="2" class="table t2 green">2</div>
+                </div>
+                <div class="tmid">
+                    <div id="3" class="table t1 green">3</div>
+                    <div id="4" class="table t2 green">4</div>
+                </div>
+                <div class="tbot">
+                    <div id="5" class="table t1 green">5</div>
+                    <div id="6" class="table t2 green">6</div>
+                </div>
+            </div>
+            <div class="dancefloor">Dance Floor</div>
+            <div class="tablesright">
+                <div class="ttop">
+                    <div id="7" class="table t1 green">7</div>
+                    <div id="8" class="table t2 green">8</div>
+                </div>
+                <div class="tmid">
+                    <div id="9" class="table t1 green">9</div>
+                    <div id="10" class="table t2 green">10</div>
+                </div>
+                <div class="tbot">
+                    <div id="11" class="table t1 green">11</div>
+                    <div id="12" class="table t2 green">12</div>
+                </div>
+            </div>
+            <div class="gate g2"></div>
+        </div>
+
+        <div class="bot">
+            <div class="entrance">Entrance</div>
+        </div>
+
+        <h3>Send your request</h3>
+        <div>
+            <form action="" method="POST">
+                <div>
+                    <input type="text" name="user" placeholder="User">
+                </div> 
+                <div>
+                    <input type="number" name="ntable" placeholder="Table Number">
+                </div>
+                <div>
+                    <button type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+
+        <h3>Delete your request</h3>
+        <div>
+            <form action="/del" method="POST">
+                <div>
+                    <input type="number" name="ntable" placeholder="Number">
+                </div>
+                <div>
+                    <button type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div class="para">
+        {{#each tables}}
+            <p class="tab">{{ntable}}</p>
+        {{/each}}
+    </div>
+
+    <script>
+        let ps = document.querySelectorAll('.tab');
+        let tables = document.querySelectorAll('.table')
+        
+        
+        for(p of ps){
+            for(table of tables){
+                let text = p.innerHTML;
+                if(text == table.id){
+                    table.classList.remove('green');
+                    table.classList.add('red');
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

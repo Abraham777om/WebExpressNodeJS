@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <style>
+        .logo{
+            width: 100px;
+            height: 100px;
+        }
+        .container{
+            width: 100px;
+            height: 100px;
+        }
+        img{
+            height: 150px;
+            border-radius: 10px;
+            width: 150px;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Welcome back {{name}}</h1>
+
+    <main>
+        <section>
+            <img src="images/iswlogo.png" alt="">
+            <h1>Graduation 2023</h1>
+            <a href="/gallery">Gallery</a>
+            <a href="/partyroom">Party Room</a>
+            <a href="/vip">VIP</a>
+        </section>
+
+        <section>
+            <h1>Graduated Groups</h1>
+            <h2>ISW BIS 2018 Generation</h2>
+
+            <h1>Graduates</h1>
+
+            <div class="container">
+                <form id="form" enctype="multipart/form-data" method="POST">
+                    <div>
+                        <input type="file" id="image">
+                    </div>
+                    <div>
+                        <button>Upload</button>
+                    </div>
+                </form>
+                <button onclick="remove()">Remove</button>
+                <div id="result"></div>
+            </div>
+            
+            <h1>Phrases</h1>
+
+            <h1>Write Your Own Phrase!</h1>
+
+            <form action="" method="POST">
+                <div>
+                    <div>
+                        <input type="text" name="phrase" placeholder="Phrase">
+                    </div>
+
+                    <div>
+                        <button type="submit">Upload</button>
+                    </div>
+                </div>
+                <div class="text">
+
+                </div>
+            </form>
+
+            <div>
+                {{#each phrases}}
+                    <p>{{phrase}}</p>
+                {{/each}}
+            </div>
+
+            <div>
+                <h1>Menu</h1>
+                <h2>Main Course</h2>
+                <div>
+                    <img src="images/steak.jpg" alt="steak with spaguetti and salad image">
+                    <h3>Steak, Spaggueti and Salad</h3>
+                </div>
+                <div>
+                    <img src="images/chicken.jpg"alt="chicken with smashed potatoes and vegetables image">
+                    <h3>Chicken, Smashed Potatoes and Vegetables</h3>
+                </div>
+                <div>
+                    <img src="images/fish.jpg"alt="fish with rice and salad image">
+                    <h3>Fish, Rice and Salada</h3>
+                </div>
+
+                <h2>Dessert</h2>
+                <div>
+                    <img src="images/cheescake.jpeg"alt="cheescake image">
+                    <h3>Cheescake</h3>
+                </div>
+                <div>
+                    <img src="images/chocolate.jpeg"alt="chocolate souffle image">
+                    <h3>Chocolate Souffle</h3>
+                </div>
+                <div>
+                    <img src="images/tiramisu.jpeg"alt="tiramisu image">
+                    <h3>Tiramisu</h3>
+                </div>
+
+                <h3>Make your Order!</h2>
+                <div>
+                    <form action="/hom" method="POST">
+                        <div>
+                            <input type="text" name="user" placeholder="User">
+                        </div>
+                        
+                        <div>
+                            <input type="text" name="person" placeholder="Person">
+                        </div>
+
+                        <div>
+                            <input type="text" name="maincourse" placeholder="Main Course">
+                        </div>
+                        <div>
+                            <input type="text" name="dessert" placeholder="Dessert">
+                        </div>
+                        <div>
+                            <input type="number" name="tab" placeholder="Table">
+                        </div>
+                        <div>
+                            <button type="submit">Send Your Order!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <h1>Place Address</h1>
+                <h3>Centro Cultural y de Convenciones Bicentenario</h3>
+                <img src="images/bicentenario.jpeg" alt="Bicentenario Imagen">
+                <h3>Colonia Obrera, Silvestre Dorador 34070, Durango Dgo</h3>
+            </div>
+
+            <div>
+                <h1>GREAT MOMENTS HAPPEN ONCE IN YOUR LIFE!</h1>
+                <H1>Graduation 2023</H1>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        var form = document.getElementById('form');
+
+        var parent = document.getElementById('result');
+
+        var t = document.getElementById('text');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault()
+
+            var reader = new FileReader()
+
+            var name = document.getElementById('image').files[0].name;
+
+            reader.addEventListener('load', function(){
+                if(this.result && localStorage){
+                    window.localStorage.setItem(name, this.result)
+                    alert('Your Image was uploaded')
+                    res.innerHTML = ''
+                    showImages()
+                }
+                else{
+                    alert('Your image cannot be uploaded please try it later')
+                }
+            })
+
+            reader.readAsDataURL(document.getElementById('image').files[0])
+
+            console.log(name);
+        })
+
+        function showImages(){
+            for(let i=0; i<window.localStorage.length; i++){
+                let res = window.localStorage.getItem(window.localStorage.key(i))
+                var image = new Image()
+                image.src = res;
+
+                parent.appendChild(image);
+
+            }
+        }
+
+        function remove(){
+            window.localStorage.clear()
+            parent.innerHTML = ''
+        }
+        
+        showImages();
+
+
+    </script>
+
+</body>
+</html>
